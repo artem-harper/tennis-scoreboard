@@ -1,15 +1,22 @@
 package controller;
 
+import dto.PlayerDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import repository.PlayerRepository;
+import service.MatchService;
+import service.PlayerService;
 
 import java.io.IOException;
 
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet {
+
+    MatchService matchService = MatchService.getInstance();
+    PlayerService playerService = PlayerService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,6 +26,21 @@ public class NewMatchServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name1 = req.getParameter("player1");
+        String name2= req.getParameter("player2");
+
+        System.out.println();
+        PlayerDto createDto1 = PlayerDto.builder()
+                .name(name1)
+                .build();
+
+        PlayerDto createDto2 = PlayerDto.builder()
+                .name(name2)
+                .build();
+
+
+        matchService.startNewMatch(playerService.save(createDto1), playerService.save(createDto2));
+
 
     }
 }

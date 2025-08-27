@@ -15,10 +15,10 @@
         <div class="form-container center">
             <form method="post" action="${pageContext.request.contextPath}/new-match">
                 <label for="player1">Player 1</label>
-                <input class="input-player" type="text" id="player1" placeholder="Enter a player 1 name">
+                <input class="input-player" name="player1" type="text" id="player1" placeholder="Enter a player 1 name">
 
                 <label for="player2">Player 2</label>
-                <input class="input-player" type="text" id="player2" placeholder="Enter a player 2 name">
+                <input class="input-player" name="player2" type="text" id="player2" placeholder="Enter a player 2 name">
                 <input class="form-button" type="submit" value="Start">
             </form>
         </div>
