@@ -8,50 +8,34 @@ import util.HibernateUtil;
 import java.util.List;
 import java.util.Optional;
 
-public class PlayerRepository implements Repository<Integer, Player> {
+public class PlayerRepository extends BaseRepository<Integer, Player>{
 
     private final static PlayerRepository INSTANCE = new PlayerRepository();
 
-    @Override
-    public Player save(Player player) {
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.openSession()){
+    private PlayerRepository() {
+        super(Player.class);
+    }
+
+    public Optional<Player> findByName(Player player) {
+        try (Session session = sessionFactory.openSession()){
 
             session.beginTransaction();
 
-            session.persist(player);
+
+            Player player1 = session.createQuery("from Player p where p.name=:name", Player.class)
+                    .setParameter("name", player.getName())
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
 
             session.getTransaction().commit();
-            return player;
-        }
-    }
 
-    @Override
-    public Optional<Player> findByName(Player player) {
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-             Session session = sessionFactory.openSession()){
-
-
-            return Optional.ofNullable(player);
+            return Optional.ofNullable(player1);
         }
     }
 
     public static PlayerRepository getInstance(){
         return INSTANCE;
-    }
-
-    public List<Player> findAll() {
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-             Session session = sessionFactory.openSession()){
-
-            session.beginTransaction();
-
-            List<Player> list = session.createQuery("from Player", Player.class).getResultList();
-
-            session.getTransaction().commit();
-
-            return list;
-        }
     }
 
     public void deleteAll() {
