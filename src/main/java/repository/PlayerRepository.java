@@ -21,7 +21,6 @@ public class PlayerRepository extends BaseRepository<Integer, Player>{
 
             session.beginTransaction();
 
-
             Player player1 = session.createQuery("from Player p where p.name=:name", Player.class)
                     .setParameter("name", player.getName())
                     .getResultStream()
@@ -39,8 +38,7 @@ public class PlayerRepository extends BaseRepository<Integer, Player>{
     }
 
     public void deleteAll() {
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-             Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()){
 
             session.beginTransaction();
 

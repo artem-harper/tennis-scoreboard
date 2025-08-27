@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
-
-
 @ToString
 @EqualsAndHashCode()
 @Getter
@@ -15,16 +12,22 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name = "players", indexes = @Index(name = "name_index", columnList = "name"))
+@Table(name = "matches")
 
-public class Player implements BaseEntity<Integer> {
+public class Match {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
-    @Column(nullable = false, unique = true)
-    private String name;
+    @ManyToOne
+    private Player player1;
+
+    @ManyToOne
+    private Player player2;
+
+    @ManyToOne
+    private Player winner;
 
 
 }
