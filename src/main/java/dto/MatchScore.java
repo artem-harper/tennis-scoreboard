@@ -22,4 +22,9 @@ public class MatchScore {
         this.player1 = player1;
         this.player2 = player2;
     }
+
+    public void resetPoints(){
+        playerScore1.setPoints(0);
+        playerScore2.setPoints(0);
+    }
 }

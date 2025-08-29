@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.MatchService;
+import service.OngoingMatchesService;
 import service.PlayerService;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet {
 
-    MatchService matchService = MatchService.getInstance();
+    OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
     PlayerService playerService = PlayerService.getInstance();
 
     @Override
@@ -38,7 +38,7 @@ public class NewMatchServlet extends HttpServlet {
                 .build();
 
 
-        UUID MatchUUID = matchService.startNewMatch(playerService.save(createDto1), playerService.save(createDto2));
+        UUID MatchUUID = ongoingMatchesService.startNewMatch(playerService.save(createDto1), playerService.save(createDto2));
 
         resp.sendRedirect("http://localhost:8081/match-score?uuid="+MatchUUID);
 

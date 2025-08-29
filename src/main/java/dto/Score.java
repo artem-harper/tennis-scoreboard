@@ -11,5 +11,12 @@ public class Score {
     private int Games;
     private int Points;
 
+    public boolean isAdvantage=false;
 
+    public String displayPoints(){
+        if (isAdvantage){
+            return "AD";
+        }
+        return String.valueOf(Points);
+    }
 }

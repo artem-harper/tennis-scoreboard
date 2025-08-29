@@ -6,27 +6,24 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.MatchService;
+import service.ScoreCalculationService;
+import service.OngoingMatchesService;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 @WebServlet("/match-score")
 public class MatchScoreServlet extends HttpServlet {
 
-    MatchService matchService = MatchService.getInstance();
-
-
-
+    OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
+    ScoreCalculationService scoreCalculationService = ScoreCalculationService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         UUID MatchUUID = UUID.fromString(req.getParameter("uuid"));
 
-        MatchScore matchScore = matchService.getMatches().get(MatchUUID);
+        MatchScore matchScore = ongoingMatchesService.getMatches().get(MatchUUID);
 
         req.setAttribute("matchScore", matchScore);
 
@@ -38,13 +35,10 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         UUID MatchUUID = UUID.fromString(req.getParameter("uuid"));
-
-        MatchScore matchScore = matchService.getMatches().get(MatchUUID);
-
-
+        MatchScore matchScore = ongoingMatchesService.getMatches().get(MatchUUID);
         int winnerId = Integer.parseInt(req.getParameter("winner"));
 
-        matchService.winPoint(matchScore, winnerId);
+        scoreCalculationService.winPoint(matchScore, winnerId);
 
         req.setAttribute("matchScore", matchScore);
 

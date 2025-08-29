@@ -53,7 +53,7 @@
                     <td class="table-text">${requestScope.matchScore.getPlayer1().getName()}</td>
                     <td class="table-text">${requestScope.matchScore.getPlayerScore1().getSets()}</td>
                     <td class="table-text">${requestScope.matchScore.getPlayerScore1().getGames()}</td>
-                    <td class="table-text">${requestScope.matchScore.getPlayerScore1().getPoints()}</td>
+                    <td class="table-text">${requestScope.matchScore.getPlayerScore1().displayPoints()}</td>
                     <td class="table-text">
                         <form action="${pageContext.request.contextPath}/match-score?uuid=${requestScope.matchScore.getMatchUUID()}"
                               method="post">
@@ -67,7 +67,7 @@
                     <td class="table-text">${requestScope.matchScore.getPlayer2().getName()}</td>
                     <td class="table-text">${requestScope.matchScore.getPlayerScore2().getSets()}</td>
                     <td class="table-text">${requestScope.matchScore.getPlayerScore2().getGames()}</td>
-                    <td class="table-text">${requestScope.matchScore.getPlayerScore2().getPoints()}</td>
+                    <td class="table-text">${requestScope.matchScore.getPlayerScore2().displayPoints()}</td>
                     <td class="table-text">
                         <form action="${pageContext.request.contextPath}/match-score?uuid=${requestScope.matchScore.getMatchUUID()}"
                               method="post">
