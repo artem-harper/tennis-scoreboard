@@ -27,4 +27,10 @@ public class MatchScore {
         playerScore1.setPoints(0);
         playerScore2.setPoints(0);
     }
+
+    public void resetGames(){
+        playerScore1.setGames(0);
+        playerScore2.setGames(0);
+
+    }
 }
