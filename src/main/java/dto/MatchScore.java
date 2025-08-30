@@ -17,6 +17,10 @@ public class MatchScore {
     private Score playerScore1 = new Score();
     private Score playerScore2 = new Score();
 
+    private boolean isTieBreak = false;
+    private int currentPoint1;
+    private int currentPoint2;
+
     public MatchScore(UUID matchUUID, PlayerDto player1, PlayerDto player2) {
         MatchUUID = matchUUID;
         this.player1 = player1;
@@ -24,6 +28,8 @@ public class MatchScore {
     }
 
     public void resetPoints(){
+        this.currentPoint1 = 0;
+        this.currentPoint2 = 0;
         playerScore1.setPoints(0);
         playerScore2.setPoints(0);
     }

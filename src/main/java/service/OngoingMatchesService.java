@@ -25,7 +25,9 @@ public class OngoingMatchesService {
         return MatchUUID;
     }
 
-
+    public void removeEndedMatch(UUID MatchUUID){
+        matches.remove(MatchUUID);
+    }
 
     public static OngoingMatchesService getInstance(){
         return INSTANCE;

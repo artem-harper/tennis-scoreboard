@@ -40,6 +40,13 @@ public class MatchScoreServlet extends HttpServlet {
 
         scoreCalculationService.winPoint(matchScore, winnerId);
 
+        if (scoreCalculationService.isGameOver(matchScore)){
+            ongoingMatchesService.removeEndedMatch(MatchUUID);
+
+            req.setAttribute("matchScore", matchScore);
+            req.getRequestDispatcher("/match-over.jsp").forward(req,resp);
+        }
+
         req.setAttribute("matchScore", matchScore);
 
         req.getRequestDispatcher("match-score.jsp")

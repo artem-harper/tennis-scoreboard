@@ -6,21 +6,15 @@ import dto.Score;
 public class ScoreCalculationService {
 
     private static final ScoreCalculationService INSTANCE = new ScoreCalculationService();
-
     private final int MAX_POINT = 4;
     private final int MAX_GAMES = 6;
     private final int MAX_TIEBREAK_GAMES = 7;
     private final int MAX_SETS = 2;
-
     private final int ADD_POINTS1 = 15;
     private final int ADD_POINTS2 = 10;
 
-    private boolean isTieBreak = false;
-
-    private int currentPoint1;
-    private int currentPoint2;
-
     public void winPoint(MatchScore matchScore, int winnerId) {
+
         Score playerScore1 = matchScore.getPlayerScore1();
         Score playerScore2 = matchScore.getPlayerScore2();
 
@@ -29,20 +23,15 @@ public class ScoreCalculationService {
         if (winnerId == matchScore.getPlayer1().getId()) {
 
             if (advantage(playerScore1, playerScore2)) {
-                addPoint(playerScore1, currentPoint1);
-                currentPoint1++;
+                addPoint(matchScore, playerScore1, matchScore.getCurrentPoint1());
+                matchScore.setCurrentPoint1(matchScore.getCurrentPoint1() + 1);
             }
 
-            if (playerScore1.getGames()==6){
-                System.out.println();
-            }
-            if (winGame(playerScore1, currentPoint1, currentPoint2)) {
+            if (winGame(matchScore, playerScore1, matchScore.getCurrentPoint1(), matchScore.getCurrentPoint2())) {
                 matchScore.resetPoints();
-                currentPoint1 = 0;
-                currentPoint2 = 0;
             }
-            if (difference(playerScore1, playerScore2)) {
-                if (winSet(playerScore1)) {
+            if (difference(matchScore, playerScore1, playerScore2)) {
+                if (winSet(matchScore, playerScore1)) {
                     matchScore.resetGames();
                 }
             }
@@ -50,35 +39,43 @@ public class ScoreCalculationService {
         } else if (winnerId == matchScore.getPlayer2().getId()) {
 
             if (advantage(playerScore2, playerScore1)) {
-                addPoint(playerScore2, currentPoint2);
-                currentPoint2++;
+                addPoint(matchScore, playerScore2, matchScore.getCurrentPoint2());
+                matchScore.setCurrentPoint2(matchScore.getCurrentPoint2() + 1);
             }
-            if (winGame(playerScore2, currentPoint2, currentPoint1)) {
+            if (winGame(matchScore, playerScore2, matchScore.getCurrentPoint2(), matchScore.getCurrentPoint1())) {
                 matchScore.resetPoints();
-                currentPoint2 = 0;
-                currentPoint1 = 0;
             }
-            if (difference(playerScore2, playerScore1)) {
-                if (winSet(playerScore2)) {
+            if (difference(matchScore, playerScore2, playerScore1)) {
+                if (winSet(matchScore, playerScore2)) {
                     matchScore.resetGames();
                 }
             }
         }
     }
 
+    public boolean isGameOver(MatchScore matchScore) {
+        if (matchScore.getPlayerScore1().getSets() == MAX_SETS) {
+            matchScore.getPlayerScore1().setStatus("WIN");
+            return true;
+        } else if (matchScore.getPlayerScore2().getSets() == MAX_SETS) {
+            matchScore.getPlayerScore2().setStatus("WIN");
+            return true;
+        }
+        return false;
+    }
+
     public void tieBreak(MatchScore matchScore) {
         if (matchScore.getPlayerScore1().getGames() == 6 && matchScore.getPlayerScore2().getGames() == 6) {
-            isTieBreak = true;
-
+            matchScore.setTieBreak(true);
         } else {
-            isTieBreak = false;
+            matchScore.setTieBreak(false);
         }
     }
 
-    public boolean difference(Score playerScore, Score opponentScore) {
-        if (isTieBreak) {
+    public boolean difference(MatchScore matchScore, Score playerScore, Score opponentScore) {
+        if (matchScore.isTieBreak()) {
             return true;
-        }else {
+        } else {
             return Math.abs(playerScore.getGames() - opponentScore.getGames()) >= 2;
         }
     }
@@ -98,12 +95,12 @@ public class ScoreCalculationService {
         return true;
     }
 
-    private boolean winGame(Score playerScore1, int currentPoint, int playerPoint2) {
-        if (isTieBreak) {
-            if (currentPoint==7 && currentPoint-playerPoint2>=2){
+    private boolean winGame(MatchScore matchScore, Score playerScore1, int currentPoint, int playerPoint2) {
+        if (matchScore.isTieBreak()) {
+            if (currentPoint == 7 && currentPoint - playerPoint2 >= 2) {
                 playerScore1.setGames(playerScore1.getGames() + 1);
                 return true;
-            } else if (currentPoint>7 && currentPoint-playerPoint2>=2 ) {
+            } else if (currentPoint > 7 && currentPoint - playerPoint2 >= 2) {
                 playerScore1.setGames(playerScore1.getGames() + 1);
                 return true;
             }
@@ -116,8 +113,8 @@ public class ScoreCalculationService {
         return false;
     }
 
-    private boolean winSet(Score playerScore) {
-        if (isTieBreak){
+    private boolean winSet(MatchScore matchScore, Score playerScore) {
+        if (matchScore.isTieBreak()) {
             if (playerScore.getGames() == MAX_TIEBREAK_GAMES) {
                 playerScore.setSets(playerScore.getSets() + 1);
                 return true;
@@ -134,9 +131,9 @@ public class ScoreCalculationService {
         return false;
     }
 
-    private void addPoint(Score playerScore, int currentPoint) {
-        if (isTieBreak){
-            playerScore.setPoints(playerScore.getPoints()+1);
+    private void addPoint(MatchScore matchScore, Score playerScore, int currentPoint) {
+        if (matchScore.isTieBreak()) {
+            playerScore.setPoints(playerScore.getPoints() + 1);
             return;
         }
         if (currentPoint == 0 || currentPoint == 1) {

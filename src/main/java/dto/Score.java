@@ -14,8 +14,9 @@ public class Score {
     private int Sets;
     private int Games;
     private int Points;
-
     public boolean isAdvantage=false;
+
+    public String status;
 
     public Score(int sets, int games, int points) {
         Sets = sets;
