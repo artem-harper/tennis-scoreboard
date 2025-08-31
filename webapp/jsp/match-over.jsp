@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -20,14 +20,14 @@
     <section class="nav-header">
         <div class="brand">
             <div class="nav-toggle">
-                <img src="images/menu.png" alt="Logo" class="logo">
+                <img src="../images/menu.png" alt="Logo" class="logo">
             </div>
             <span class="logo-text">TennisScoreboard</span>
         </div>
         <div>
             <nav class="nav-links">
                 <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
-                <a class="nav-link" href="#">Matches</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/matches">Matches</a>
             </nav>
         </div>
     </section>
@@ -54,13 +54,9 @@
                     <td class="table-text">${requestScope.matchScore.getPlayerScore1().getSets()}</td>
                     <td class="table-text">${requestScope.matchScore.getPlayerScore1().getGames()}</td>
                     <td class="table-text">${requestScope.matchScore.getPlayerScore1().displayPoints()}</td>
-                    <td class="table-text">
-                        <form action="${pageContext.request.contextPath}/match-score?uuid=${requestScope.matchScore.getMatchUUID()}"
-                              method="post">
-                            <input type="hidden" name="winner" value=${requestScope.matchScore.getPlayer1().getId()}>
-                            <button type=submit class="score-btn">Score</button>
-                        </form>
-                    </td>
+                    <td class="table-text">${requestScope.matchScore.getPlayerScore1().getStatus()}</td>
+
+
                 </tr>
 
                 <tr class="player2">
@@ -68,13 +64,7 @@
                     <td class="table-text">${requestScope.matchScore.getPlayerScore2().getSets()}</td>
                     <td class="table-text">${requestScope.matchScore.getPlayerScore2().getGames()}</td>
                     <td class="table-text">${requestScope.matchScore.getPlayerScore2().displayPoints()}</td>
-                    <td class="table-text">
-                        <form action="${pageContext.request.contextPath}/match-score?uuid=${requestScope.matchScore.getMatchUUID()}"
-                              method="post">
-                            <input type="hidden" name="winner" value=${requestScope.matchScore.getPlayer2().getId()}>
-                            <button type=submit class="score-btn">Score</button>
-                        </form>
-                    </td>
+                    <td class="table-text">${requestScope.matchScore.getPlayerScore2().getStatus()}</td>
                 </tr>
 
                 </tbody>

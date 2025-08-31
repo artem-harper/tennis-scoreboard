@@ -13,6 +13,7 @@ public class MatchScore {
     private UUID MatchUUID;
     private PlayerDto player1;
     private PlayerDto player2;
+    private PlayerDto winner;
 
     private Score playerScore1 = new Score();
     private Score playerScore2 = new Score();

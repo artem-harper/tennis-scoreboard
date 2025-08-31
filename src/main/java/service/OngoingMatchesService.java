@@ -14,6 +14,9 @@ public class OngoingMatchesService {
 
     private ConcurrentMap<UUID, MatchScore> matches = new ConcurrentHashMap<>();
 
+    private OngoingMatchesService(){
+
+    }
 
     public UUID startNewMatch(PlayerDto player1, PlayerDto player2){
         UUID MatchUUID = UUID.randomUUID();

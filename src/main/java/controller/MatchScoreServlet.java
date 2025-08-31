@@ -1,11 +1,14 @@
 package controller;
 
+import dto.MatchDto;
 import dto.MatchScore;
+import entity.Player;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.FinishedMatchesService;
 import service.ScoreCalculationService;
 import service.OngoingMatchesService;
 
@@ -17,6 +20,7 @@ public class MatchScoreServlet extends HttpServlet {
 
     OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
     ScoreCalculationService scoreCalculationService = ScoreCalculationService.getInstance();
+    private final FinishedMatchesService finishedMatchesService = FinishedMatchesService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,7 +31,7 @@ public class MatchScoreServlet extends HttpServlet {
 
         req.setAttribute("matchScore", matchScore);
 
-        req.getRequestDispatcher("match-score.jsp")
+        req.getRequestDispatcher("jsp/match-score.jsp")
                 .forward(req, resp);
     }
 
@@ -36,6 +40,7 @@ public class MatchScoreServlet extends HttpServlet {
 
         UUID MatchUUID = UUID.fromString(req.getParameter("uuid"));
         MatchScore matchScore = ongoingMatchesService.getMatches().get(MatchUUID);
+
         int winnerId = Integer.parseInt(req.getParameter("winner"));
 
         scoreCalculationService.winPoint(matchScore, winnerId);
@@ -43,13 +48,21 @@ public class MatchScoreServlet extends HttpServlet {
         if (scoreCalculationService.isGameOver(matchScore)){
             ongoingMatchesService.removeEndedMatch(MatchUUID);
 
+            MatchDto endedMatch = MatchDto.builder()
+                    .player1(matchScore.getPlayer1())
+                    .player2(matchScore.getPlayer2())
+                    .winner(matchScore.getWinner())
+                    .build();
+
+            finishedMatchesService.saveFinishedMatch(endedMatch);
+
             req.setAttribute("matchScore", matchScore);
-            req.getRequestDispatcher("/match-over.jsp").forward(req,resp);
+            req.getRequestDispatcher("jsp/match-over.jsp").forward(req,resp);
         }
 
         req.setAttribute("matchScore", matchScore);
 
-        req.getRequestDispatcher("match-score.jsp")
+        req.getRequestDispatcher("jsp/match-score.jsp")
                 .forward(req, resp);
     }
 }

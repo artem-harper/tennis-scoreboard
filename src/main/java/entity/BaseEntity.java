@@ -3,7 +3,6 @@ package entity;
 import java.io.Serializable;
 
 public interface BaseEntity<Key extends Serializable> {
-    void setId(Key id);
 
     Key getId();
 }

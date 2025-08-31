@@ -16,6 +16,10 @@ public class PlayerService {
     private final PlayerMapper playerMapper = PlayerMapper.getInstance();
 
 
+    private PlayerService(){
+
+    }
+
     public PlayerDto save(PlayerDto createPlayerDto){
         Player player = playerMapper.mapToEntity(createPlayerDto);
 

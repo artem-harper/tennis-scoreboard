@@ -8,6 +8,10 @@ public class PlayerMapper implements Mapper<PlayerDto, Player>{
 
     private final static PlayerMapper INSTANCE = new PlayerMapper();
 
+    private PlayerMapper(){
+
+    }
+
     @Override
     public Player mapToEntity(PlayerDto object) {
         return Player.builder()

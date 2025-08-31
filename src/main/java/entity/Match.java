@@ -2,7 +2,6 @@ package entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @ToString
 @EqualsAndHashCode()
@@ -13,12 +12,11 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Builder
 @Table(name = "matches")
-
-public class Match {
+public class Match implements BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     private Player player1;
@@ -28,6 +26,4 @@ public class Match {
 
     @ManyToOne
     private Player winner;
-
-
 }

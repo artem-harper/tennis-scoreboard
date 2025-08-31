@@ -13,6 +13,10 @@ public class ScoreCalculationService {
     private final int ADD_POINTS1 = 15;
     private final int ADD_POINTS2 = 10;
 
+    private ScoreCalculationService(){
+
+    }
+
     public void winPoint(MatchScore matchScore, int winnerId) {
 
         Score playerScore1 = matchScore.getPlayerScore1();
@@ -56,9 +60,11 @@ public class ScoreCalculationService {
     public boolean isGameOver(MatchScore matchScore) {
         if (matchScore.getPlayerScore1().getSets() == MAX_SETS) {
             matchScore.getPlayerScore1().setStatus("WIN");
+            matchScore.setWinner(matchScore.getPlayer1());
             return true;
         } else if (matchScore.getPlayerScore2().getSets() == MAX_SETS) {
             matchScore.getPlayerScore2().setStatus("WIN");
+            matchScore.setWinner(matchScore.getPlayer2());
             return true;
         }
         return false;

@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Artem
-  Date: 26.08.2025
-  Time: 22:14
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -24,7 +18,7 @@
                 Start a new match
             </button>
         </a>
-        <a class="homepage-action-button" href="#">
+        <a class="homepage-action-button" href="${pageContext.request.contextPath}/matches">
             <button class="btn view-results">
                 View match results
             </button>
