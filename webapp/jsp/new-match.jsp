@@ -14,6 +14,7 @@
         <div class="new-match-image"></div>
         <div class="form-container center">
             <form method="post" action="${pageContext.request.contextPath}/new-match">
+                <p style="color: red;">${requestScope.errorMessage}</p>
                 <label for="player1">Player 1</label>
                 <input class="input-player" name="player1" type="text" id="player1" placeholder="Enter a player 1 name">
 
