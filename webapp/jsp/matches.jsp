@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -35,12 +34,18 @@
     <div class="container">
         <h1>Matches</h1>
         <div class="input-container">
-            <input class="input-filter" placeholder="Filter by name" type="text" />
+
+            <form class="filter-form" method="get" action="${pageContext.request.contextPath}/matches?">
+                <input class="input-filter" name="filter_by_player_name" placeholder="Filter by name" type="text">
+            </form>
+
             <div>
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/matches?filter_by_player_name=">
                     <button class="btn-filter">Reset Filter</button>
                 </a>
             </div>
+
+
         </div>
 
         <table class="table-matches">
@@ -60,13 +65,22 @@
         </table>
 
         <div class="pagination">
-            <a class="prev" href="#"> < </a>
+            <c:if test="${requestScope.currentPage>1}">
+                <a class="prev"
+                   href="${pageContext.request.contextPath}/matches?page=${requestScope.currentPage-1}&filter_by_player_name=${requestScope.filterByName}">
+                    < </a>
+            </c:if>
 
-            <c:forEach begin="1" end="3" var="pageNum">
-                <a class="num-page ${requestScope.currentPage==pageNum?"current":""}" href="${pageContext.request.contextPath}/matches?page=${pageNum}">${pageNum} </a>
+            <c:forEach begin="1" end="${requestScope.allPagesNum}" var="pageNum">
+                <a class="num-page ${requestScope.currentPage==pageNum?"current":""}"
+                   href="${pageContext.request.contextPath}/matches?page=${pageNum}&filter_by_player_name=${requestScope.filterByName}">${pageNum} </a>
             </c:forEach>
 
-            <a class="next" href="${pageContext.request.contextPath}/matches?page=${requestScope.currentPage+3}"> > </a>
+            <c:if test="${requestScope.currentPage<requestScope.allPagesNum}">
+                <a class="next"
+                   href="${pageContext.request.contextPath}/matches?page=${requestScope.currentPage+1}&filter_by_player_name=${requestScope.filterByName}">
+                    > </a>
+            </c:if>
         </div>
     </div>
 </main>

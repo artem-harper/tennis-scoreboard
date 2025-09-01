@@ -31,9 +31,20 @@ public class FinishedMatchesService {
     }
 
     public List<MatchDto> findMatchesPage (int page){
-
         return matchRepository.findMatchesPage(page)
                 .stream().map(match -> matchMapper.mapToDto(match))
+                .toList();
+    }
+
+    public List<MatchDto> findMatchesPageFilterByName (int page, String name){
+        return matchRepository.findMatchesPageByName(page, name)
+                .stream().map(match -> matchMapper.mapToDto(match))
+                .toList();
+    }
+
+    public List<MatchDto> findAllMatchesByName(String name){
+        return matchRepository.findAllMatchesByName(name).stream()
+                .map(match -> matchMapper.mapToDto(match))
                 .toList();
     }
 
