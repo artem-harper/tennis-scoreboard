@@ -48,17 +48,3 @@ Tennis Match Scoreboard is a web application that allows you to:
 | **JSP** | 2.3+ | View templating |
 | **Maven** | 3.6+ | Build and dependency management |
 | **Tomcat** | 10.0+ | Application server |
-
-## 📦 Installation
-
-### Prerequisites
-- Java 21 or higher
-- Apache Maven 3.6+
-- Tomcat 10+ (optional, embedded available)
-
-### Quick Start
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/your-username/tennis-scoreboard.git
-cd tennis-scoreboard
