@@ -30,7 +30,6 @@ public class ValidationFilter extends HttpFilter {
 
 
         List<String> errors = Validator.isCorrectName(player1name, player2name);
-
         if (!errors.isEmpty()){
             httpServletRequest.setAttribute("errorMessage", errors.getFirst());
             httpServletRequest.getRequestDispatcher("jsp/new-match.jsp").forward(req, res);

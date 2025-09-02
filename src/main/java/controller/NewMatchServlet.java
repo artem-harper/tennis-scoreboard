@@ -40,7 +40,13 @@ public class NewMatchServlet extends HttpServlet {
 
         UUID MatchUUID = ongoingMatchesService.startNewMatch(playerService.save(createDto1), playerService.save(createDto2));
 
-        resp.sendRedirect("http://localhost:8081/match-score?uuid="+MatchUUID);
+        String baseUrl = req.getRequestURL().toString();
+        String contextPath = req.getContextPath();
+        String domain = baseUrl.substring(0, baseUrl.indexOf(contextPath));
+
+        String redirectUrl = domain + contextPath + "/match-score?uuid=" + MatchUUID;
+
+        resp.sendRedirect(redirectUrl);
 
     }
 }
