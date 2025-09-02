@@ -2,7 +2,6 @@ package controller;
 
 import dto.MatchDto;
 import dto.MatchScore;
-import entity.Player;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

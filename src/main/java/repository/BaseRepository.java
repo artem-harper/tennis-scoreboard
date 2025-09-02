@@ -1,14 +1,12 @@
 package repository;
 
 import entity.BaseEntity;
-import entity.Player;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import util.HibernateUtil;
-
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
+
 
 public abstract class BaseRepository<K extends Serializable, T extends BaseEntity<K>> implements Repository<K, T> {
 

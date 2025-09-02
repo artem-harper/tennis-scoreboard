@@ -1,12 +1,8 @@
 package repository;
 
 import entity.Match;
-import entity.Player;
 import org.hibernate.Session;
-
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 public class MatchRepository extends BaseRepository<Integer, Match> {
 

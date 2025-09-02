@@ -2,10 +2,6 @@ package repository;
 
 import entity.Player;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import util.HibernateUtil;
-
-import java.util.List;
 import java.util.Optional;
 
 public class PlayerRepository extends BaseRepository<Integer, Player>{

@@ -2,7 +2,6 @@ package mapper;
 
 import dto.MatchDto;
 import entity.Match;
-import entity.Player;
 
 public class MatchMapper implements Mapper<MatchDto, Match> {
 

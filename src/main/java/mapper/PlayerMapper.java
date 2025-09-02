@@ -2,7 +2,6 @@ package mapper;
 
 import dto.PlayerDto;
 import entity.Player;
-import jakarta.persistence.Id;
 
 public class PlayerMapper implements Mapper<PlayerDto, Player>{
 

@@ -2,8 +2,6 @@ package service;
 
 import dto.PlayerDto;
 import dto.MatchScore;
-import dto.Score;
-
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

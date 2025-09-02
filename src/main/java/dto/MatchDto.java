@@ -1,6 +1,5 @@
 package dto;
 
-import entity.Player;
 import lombok.*;
 
 @EqualsAndHashCode
