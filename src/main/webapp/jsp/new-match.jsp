@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
+
+<%@ include file="header.jsp"%>
+
+<main>
 <div class="container">
     <div>
         <h1>Start new match</h1>
@@ -25,5 +29,8 @@
         </div>
     </div>
 </div>
+</main>
+
+<%@ include file="footer.jsp"%>
 </body>
 </html>

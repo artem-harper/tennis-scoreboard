@@ -14,22 +14,7 @@
 </head>
 
 <body>
-<header class="header">
-    <section class="nav-header">
-        <div class="brand">
-            <div class="nav-toggle">
-                <img src="images/menu.png" alt="Logo" class="logo">
-            </div>
-            <span class="logo-text">TennisScoreboard</span>
-        </div>
-        <div>
-            <nav class="nav-links">
-                <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/matches">Matches</a>
-            </nav>
-        </div>
-    </section>
-</header>
+<%@include file="header.jsp"%>
 <main>
     <div class="container">
         <h1>Matches</h1>
@@ -84,11 +69,6 @@
         </div>
     </div>
 </main>
-<footer>
-    <div class="footer">
-        <p>&copy; Tennis Scoreboard, project from <a href="https://zhukovsd.github.io/java-backend-learning-course/">zhukovsd/java-backend-learning-course</a>
-            roadmap.</p>
-    </div>
-</footer>
+<%@ include file="footer.jsp"%>
 </body>
 </html>

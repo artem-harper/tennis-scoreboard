@@ -27,7 +27,6 @@ public class ValidationFilter extends HttpFilter {
         String player1name = httpServletRequest.getParameter("player1");
         String player2name = httpServletRequest.getParameter("player2");
 
-
         List<String> errors = Validator.isCorrectName(player1name, player2name);
         if (!errors.isEmpty()){
             httpServletRequest.setAttribute("errorMessage", errors.getFirst());
