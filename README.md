@@ -1,12 +1,11 @@
 # 🎾 Tennis Match Scoreboard
 
-A real-time tennis match scoring system built with Java Servlets and Hibernate. Track live matches with professional tennis scoring rules.
+A web application implementing a tennis match scoreboard.
 
 ![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square)
 ![Hibernate](https://img.shields.io/badge/Hibernate-6.0-blue?style=flat-square)
 ![H2 Database](https://img.shields.io/badge/H2-Database-green?style=flat-square)
 ![Servlets](https://img.shields.io/badge/Servlets-API-yellow?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)
 
 ## 📖 Overview
 
