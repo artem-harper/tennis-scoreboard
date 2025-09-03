@@ -2,10 +2,9 @@ package service;
 
 import dto.MatchScore;
 import dto.PlayerDto;
-import entity.Match;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -113,5 +112,6 @@ class ScoreCalculationServiceTest {
 
         assertEquals(2, matchScore.getPlayerScore1().getSets());
         assertTrue(scoreCalculationService.isGameOver(matchScore));
+        Assertions.assertThat(matchScore.getPlayerScore2().getSets()).isEqualTo(0);
     }
 }

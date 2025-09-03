@@ -20,7 +20,8 @@ public class MatchesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int pageSize=5;
-        int pageNum = req.getParameter("page") != null ? Integer.parseInt(req.getParameter("page")):1;
+        int pageNum = req.getParameter("page") != null ? Integer.parseInt(req.getParameter("page"))<0 ? 1: Integer.parseInt(req.getParameter("page")):1;
+
         String name = req.getParameter("filter_by_player_name") !=null ? req.getParameter("filter_by_player_name"): "";
 
         int allPagesNum;
